@@ -6,13 +6,13 @@ const conn = require('../dbConnection').promise();
 
 exports.login = async (req,res,next) =>{
     const errors = validationResult(req);
-
+    console.log(req.body);
     if(!errors.isEmpty()){
         return res.status(422).json({ errors: errors.array() });
     }
 
     try{
-
+        console.log(req.body);
         const [row] = await conn.execute(
             "SELECT * FROM `users` WHERE `email`=?",
             [req.body.email]
@@ -21,6 +21,7 @@ exports.login = async (req,res,next) =>{
         if (row.length === 0) {
             return res.status(422).json({
                 message: "Invalid email address",
+                body: req.body,
             });
         }
 

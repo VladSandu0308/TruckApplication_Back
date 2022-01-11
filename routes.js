@@ -14,7 +14,7 @@ router.post('/register', [
     .escape()
     .trim()
     .isLength({ min: 3 }),
-    body('email',"Invalid email address")
+    body('email',"Invalid email address xD")
     .notEmpty()
     .escape()
     .trim().isEmail(),
