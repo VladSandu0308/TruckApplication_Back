@@ -6,13 +6,14 @@ exports.transporterOffer = async(req,res,next) => {
     const errors = validationResult(req);
 
     if(!errors.isEmpty()){
+        
         return res.status(422).json({ errors: errors.array() });
     }
 
     try{
       const [row_users] = await conn.execute(
-        "SELECT * FROM `users` WHERE `id`=?",
-        [req.body.user_id]
+        "SELECT * FROM `users` WHERE `name`=?",
+        [req.body.user]
       );
 
       if (row_users.length === 0) {
@@ -21,21 +22,24 @@ exports.transporterOffer = async(req,res,next) => {
         });
       }
 
+      console.log("PULA1 " + req.body.dep_date);
       const [transporters_change] = await conn.execute(
-        "INSERT INTO `transporters` (`dep_date`,`dep_place`,`arival_date`,`arival_place`,`truck_type`,`volume`, `length`, `width`, `height`, `empty_price`, `full_price`, `user`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",[
+        "INSERT INTO `transporters` (`dep_date`,`dep_place`,`arival_date`,`arival_place`,`truck_type`,`volume`,`weight`, `length`, `width`, `height`, `empty_price`, `full_price`, `user`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",[
           req.body.dep_date,
           req.body.dep_place,
           req.body.arival_date,
           req.body.arival_place,
           req.body.truck_type,
           req.body.volume,
+          req.body.weight,
           req.body.length,
           req.body.width,
           req.body.height,
           req.body.empty_price,
           req.body.full_price,
-          req.body.user_id
+          row_users[0].id
         ]);
+        console.log("PULA");
 
         if (transporters_change.affectedRows == 0) {
           return res.status(422).json({

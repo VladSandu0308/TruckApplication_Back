@@ -4,7 +4,7 @@ const conn = require('../dbConnection').promise();
 
 exports.register = async(req,res,next) => {
     const errors = validationResult(req);
-
+    console.log(req.body);
     if(!errors.isEmpty()){
         return res.status(422).json({ errors: errors.array() });
     }

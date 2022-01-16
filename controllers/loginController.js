@@ -22,6 +22,7 @@ exports.login = async (req,res,next) =>{
             return res.status(422).json({
                 message: "Invalid email address",
                 body: req.body,
+                token: 0
             });
         }
 
@@ -29,16 +30,17 @@ exports.login = async (req,res,next) =>{
         if(!passMatch){
             return res.status(422).json({
                 message: "Incorrect password",
+                token: 0
             });
         }
 
         const theToken = jwt.sign({id:row[0].id},'the-super-strong-secrect',{ expiresIn: '1h' });
-
+        console.log(row[0]);
         return res.json({
             token: theToken,
             email: req.body.email,
             id : row[0].id,
-            username: row[0].username,
+            username: row[0].name,
             role: row[0].role 
         });
 

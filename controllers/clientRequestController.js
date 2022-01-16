@@ -11,8 +11,8 @@ exports.clientRequest = async(req,res,next) => {
 
     try{
       const [row_users] = await conn.execute(
-        "SELECT * FROM `users` WHERE `id`=?",
-        [req.body.user_id]
+        "SELECT * FROM `users` WHERE `name`=?",
+        [req.body.user]
       );
 
       if (row_users.length === 0) {
@@ -32,7 +32,7 @@ exports.clientRequest = async(req,res,next) => {
           req.body.product_type,
           req.body.product_weight,
           req.body.product_volume,
-          req.body.user_id
+          row_users[0].id
         ]);
 
         if (clients_change.affectedRows == 0) {

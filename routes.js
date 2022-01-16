@@ -38,12 +38,13 @@ router.post('/transporterOffer',[
   body('arival_place',"Invalid place").notEmpty(),
   body('truck_type',"Invalid type").notEmpty(),
   body('volume',"Invalid size").notEmpty(),
+  body('weight',"Invalid size").notEmpty(),
   body('length',"Invalid size").notEmpty(),
   body('width',"Invalid size").notEmpty(),
   body('height',"Invalid size").notEmpty(),
   body('empty_price',"Invalid price").notEmpty(),
   body('full_price',"Invalid price").notEmpty(),
-  body('user_id',"Invalid user_id").notEmpty(),
+  body('user',"Invalid user_id").notEmpty(),
 ], transporterOffer);
 
 router.post('/clientRequest',[
@@ -56,7 +57,7 @@ router.post('/clientRequest',[
   body('product_type',"Invalid type").notEmpty(),
   body('product_weight',"Invalid size").notEmpty(),
   body('product_volume',"Invalid size").notEmpty(),
-  body('user_id',"Invalid user_id").notEmpty(),
+  body('user',"Invalid user_id").notEmpty(),
 ], clientRequest);
 
 router.post('/contract', [
