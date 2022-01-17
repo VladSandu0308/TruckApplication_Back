@@ -59,6 +59,7 @@ router.post('/clientRequest',[
   body('product_type',"Invalid type").notEmpty(),
   body('product_weight',"Invalid size").notEmpty(),
   body('product_volume',"Invalid size").notEmpty(),
+  body('budget', 'Invalid budget').notEmpty(),
   body('user',"Invalid user_id").notEmpty(),
   body('obs', 'Invalid')
 ], clientRequest);

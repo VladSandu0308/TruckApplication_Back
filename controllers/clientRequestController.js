@@ -4,7 +4,7 @@ const conn = require('../dbConnection').promise();
 
 exports.clientRequest = async(req,res,next) => {
     const errors = validationResult(req);
-
+    console.log(req.body);
     if(!errors.isEmpty()){
         return res.status(422).json({ errors: errors.array() });
     }
@@ -20,9 +20,9 @@ exports.clientRequest = async(req,res,next) => {
           message: "The user doesn't exist",
         });
       }
-
+      
       const [clients_change] = await conn.execute(
-        "INSERT INTO `clients` (`dep_date`,`dep_max_date`, `dep_place`,`arival_date`,`arival_max_date`, `arival_place`,`product_type`,`product_weight`, `product_volume`, `user`, `obs`) VALUES(?,?,?,?,?,?,?,?,?,?,?)",[
+        "INSERT INTO `clients` (`dep_date`,`dep_max_date`, `dep_place`,`arival_date`,`arival_max_date`, `arival_place`,`product_type`,`product_weight`, `product_volume`, `budget`, `user`, `obs`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",[
           req.body.dep_date,
           req.body.dep_max_date,
           req.body.dep_place,
@@ -32,6 +32,7 @@ exports.clientRequest = async(req,res,next) => {
           req.body.product_type,
           req.body.product_weight,
           req.body.product_volume,
+          req.body.budget,
           row_users[0].id,
           req.body.obs
         ]);
