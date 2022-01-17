@@ -16,7 +16,9 @@ exports.getTransporters = async (req,res,next) => {
             });
           }
           
-          rows[i].user_name = user_name[0].name;
+          rows[i].username = user_name[0].name;
+          rows[i].phone = user_name[0].phone;
+          rows[i].email = user_name[0].email;
         }
 
 

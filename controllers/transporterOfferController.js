@@ -22,9 +22,8 @@ exports.transporterOffer = async(req,res,next) => {
         });
       }
 
-      console.log("PULA1 " + req.body.dep_date);
       const [transporters_change] = await conn.execute(
-        "INSERT INTO `transporters` (`dep_date`,`dep_place`,`arival_date`,`arival_place`,`truck_type`,`volume`,`weight`, `length`, `width`, `height`, `empty_price`, `full_price`, `user`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",[
+        "INSERT INTO `transporters` (`dep_date`,`dep_place`,`arival_date`,`arival_place`,`truck_type`,`volume`,`weight`, `length`, `width`, `height`, `empty_price`, `full_price`, `user`, `obs`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[
           req.body.dep_date,
           req.body.dep_place,
           req.body.arival_date,
@@ -37,9 +36,9 @@ exports.transporterOffer = async(req,res,next) => {
           req.body.height,
           req.body.empty_price,
           req.body.full_price,
-          row_users[0].id
+          row_users[0].id.body,
+          req.body.obs
         ]);
-        console.log("PULA");
 
         if (transporters_change.affectedRows == 0) {
           return res.status(422).json({

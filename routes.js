@@ -20,6 +20,7 @@ router.post('/register', [
     .trim().isEmail(),
     body('password',"The Password must be of minimum 4 characters length").notEmpty().trim().isLength({ min: 4 }),
     body('role', "Role must be Transporter, Expeditor or Admin").notEmpty(),
+    body('phone', 'Inalid phone').notEmpty()
 ], register);
 
 
@@ -45,6 +46,7 @@ router.post('/transporterOffer',[
   body('empty_price',"Invalid price").notEmpty(),
   body('full_price',"Invalid price").notEmpty(),
   body('user',"Invalid user_id").notEmpty(),
+  body('obs', 'Invalid')
 ], transporterOffer);
 
 router.post('/clientRequest',[
@@ -58,6 +60,7 @@ router.post('/clientRequest',[
   body('product_weight',"Invalid size").notEmpty(),
   body('product_volume',"Invalid size").notEmpty(),
   body('user',"Invalid user_id").notEmpty(),
+  body('obs', 'Invalid')
 ], clientRequest);
 
 router.post('/contract', [

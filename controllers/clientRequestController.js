@@ -22,7 +22,7 @@ exports.clientRequest = async(req,res,next) => {
       }
 
       const [clients_change] = await conn.execute(
-        "INSERT INTO `clients` (`dep_date`,`dep_max_date`, `dep_place`,`arival_date`,`arival_max_date`, `arival_place`,`product_type`,`product_weight`, `product_volume`, `user`) VALUES(?,?,?,?,?,?,?,?,?,?)",[
+        "INSERT INTO `clients` (`dep_date`,`dep_max_date`, `dep_place`,`arival_date`,`arival_max_date`, `arival_place`,`product_type`,`product_weight`, `product_volume`, `user`, `obs`) VALUES(?,?,?,?,?,?,?,?,?,?,?)",[
           req.body.dep_date,
           req.body.dep_max_date,
           req.body.dep_place,
@@ -32,7 +32,8 @@ exports.clientRequest = async(req,res,next) => {
           req.body.product_type,
           req.body.product_weight,
           req.body.product_volume,
-          row_users[0].id
+          row_users[0].id,
+          req.body.obs
         ]);
 
         if (clients_change.affectedRows == 0) {
