@@ -7,6 +7,8 @@ const {clientRequest} = require('./controllers/clientRequestController');
 const {generateContract} = require('./controllers/generateContractController');
 const {getTransporters} = require('./controllers/getTransportersController');
 const {getClients} = require('./controllers/getClientsController');
+const { getUsers } = require('./controllers/getUsers');
+const { updateUserRole } = require('./controllers/updateUserRole');
 
 router.post('/register', [
     body('name',"Insert your real name which must be of minimum 3 characters length")
@@ -19,7 +21,7 @@ router.post('/register', [
     .escape()
     .trim().isEmail(),
     body('password',"The Password must be of minimum 4 characters length").notEmpty().trim().isLength({ min: 4 }),
-    body('role', "Role must be Transporter, Expeditor or Admin").notEmpty(),
+    body('role', "Role must be Transporter, Client or Admin").notEmpty(),
     body('phone', 'Inalid phone').notEmpty()
 ], register);
 
@@ -73,7 +75,13 @@ router.post('/contract', [
   body('price',"Invalid price").notEmpty(),
 ], generateContract);
 
+router.post('/updateUserRole', [
+  body('name',"Insert your real name which must be of minimum 3 characters length").notEmpty(),
+  body('role', "Role must be Transporter, Client or Admin").notEmpty(),
+], updateUserRole);
+
 router.get('/getTransporters', getTransporters);
 router.get('/getClients', getClients);
+router.get('/getUsers', getUsers);
 
 module.exports = router;
