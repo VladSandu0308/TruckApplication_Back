@@ -4,11 +4,11 @@ const conn = require('../dbConnection').promise();
 
 exports.register = async(req,res,next) => {
     const errors = validationResult(req);
-    console.log(req.body);
+    
     if(!errors.isEmpty()){
         return res.status(422).json({ errors: errors.array() });
     }
-
+    console.log(req.body);
     try{
 
         const [row] = await conn.execute(
@@ -33,6 +33,7 @@ exports.register = async(req,res,next) => {
         ]);
 
         if (rows.affectedRows === 1) {
+            console.log("SUCCESFUL");
             return res.status(201).json({
                 message: "The user has been successfully inserted.",
             });

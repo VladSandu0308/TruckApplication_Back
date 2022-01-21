@@ -21,7 +21,6 @@ exports.getTransporters = async (req,res,next) => {
           rows[i].email = user_name[0].email;
         }
 
-
         res.contentType('application/json');
         return res.send(JSON.stringify(rows));  
     }

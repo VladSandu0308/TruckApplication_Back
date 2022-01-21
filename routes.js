@@ -67,12 +67,12 @@ router.post('/clientRequest',[
 ], clientRequest);
 
 router.post('/contract', [
-  body('truck_id',"Invalid truck_id").notEmpty(),
-  body('user_id',"Invalid user_id").notEmpty(),
-  body('client_id',"Invalid client_id").notEmpty(),
+  body('trans',"Invalid truck_id").notEmpty(),
+  body('client',"Invalid client_id").notEmpty(),
   body('dep_place',"Invalid place").notEmpty(),
   body('arival_place',"Invalid place").notEmpty(),
   body('price',"Invalid price").notEmpty(),
+  body('pay_deadline', "Missing pay deadline")
 ], generateContract);
 
 router.post('/updateUserRole', [
