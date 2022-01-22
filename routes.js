@@ -9,6 +9,7 @@ const {getTransporters} = require('./controllers/getTransportersController');
 const {getClients} = require('./controllers/getClientsController');
 const { getUsers } = require('./controllers/getUsers');
 const { updateUserRole } = require('./controllers/updateUserRole');
+const { getContracts } = require('./controllers/getContracts');
 
 router.post('/register', [
     body('name',"Insert your real name which must be of minimum 3 characters length")
@@ -83,5 +84,6 @@ router.post('/updateUserRole', [
 router.get('/getTransporters', getTransporters);
 router.get('/getClients', getClients);
 router.get('/getUsers', getUsers);
+router.get('/getContracts', getContracts);
 
 module.exports = router;

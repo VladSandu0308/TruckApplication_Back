@@ -68,10 +68,11 @@ exports.generateContract = async(req,res,next) => {
       }
 
       const [clients_change] = await conn.execute(
-        "INSERT INTO `contracts` (`transporter`, `client`, `dep_place`, `arival_place`, `price`, `pay_deadline`) VALUES(?,?,?,?,?,?)",[
+        "INSERT INTO `contracts` (`transporter`, `client`, `dep_place`, `int_place`, `arival_place`, `price`, `pay_deadline`) VALUES(?,?,?,?,?,?,?)",[
           row_trucks[0].id,
           row_clients[0].id,
           req.body.dep_place,
+          req.body.int_place,
           req.body.arival_place,
           req.body.price,
           req.body.pay_deadline
