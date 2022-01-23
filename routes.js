@@ -10,6 +10,7 @@ const {getClients} = require('./controllers/getClientsController');
 const { getUsers } = require('./controllers/getUsers');
 const { updateUserRole } = require('./controllers/updateUserRole');
 const { getContracts } = require('./controllers/getContracts');
+const { updateContract } = require('./controllers/updateContract');
 
 router.post('/register', [
     body('name',"Insert your real name which must be of minimum 3 characters length")
@@ -80,6 +81,10 @@ router.post('/updateUserRole', [
   body('name',"Insert your real name which must be of minimum 3 characters length").notEmpty(),
   body('role', "Role must be Transporter, Client or Admin").notEmpty(),
 ], updateUserRole);
+
+router.post('/finishContract', [
+  body('id', "Insert contract id").notEmpty()
+], updateContract);
 
 router.get('/getTransporters', getTransporters);
 router.get('/getClients', getClients);

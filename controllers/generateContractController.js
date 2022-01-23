@@ -41,9 +41,11 @@ exports.generateContract = async(req,res,next) => {
         });
       }
 
-      // delete offer or request
+      
 
+      // delete offer or request
       if (req.body.t_id != null) {
+        
         const [delete_trans] = await conn.execute(
           "DELETE FROM `transporters` WHERE `t_id`=?",[
           req.body.t_id
@@ -55,6 +57,7 @@ exports.generateContract = async(req,res,next) => {
             });
         }  
       } else if (req.body.c_id != null) {
+        
         const [delete_client] = await conn.execute(
           "DELETE FROM `clients` WHERE `c_id`=?",[
           req.body.c_id
@@ -68,14 +71,17 @@ exports.generateContract = async(req,res,next) => {
       }
 
       const [clients_change] = await conn.execute(
-        "INSERT INTO `contracts` (`transporter`, `client`, `dep_place`, `int_place`, `arival_place`, `price`, `pay_deadline`) VALUES(?,?,?,?,?,?,?)",[
+        "INSERT INTO `contracts` (`transporter`, `client`, `dep_place`, `int_place`, `arival_place`, `price`, `pay_deadline`, `dep_date`, `arival_date`, `finished`) VALUES(?,?,?,?,?,?,?,?,?,?)",[
           row_trucks[0].id,
           row_clients[0].id,
           req.body.dep_place,
           req.body.int_place,
           req.body.arival_place,
           req.body.price,
-          req.body.pay_deadline
+          req.body.pay_deadline,
+          req.body.dep_date,
+          req.body.arival_date,
+          0
         ]);
 
         if (clients_change.affectedRows == 0) {
