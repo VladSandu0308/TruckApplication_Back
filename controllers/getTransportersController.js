@@ -12,7 +12,7 @@ exports.getTransporters = async (req,res,next) => {
 
           if (user_name.length === 0) {
             return res.status(422).json({
-                message: "No room by that id"
+                message: "No trans by that id"
             });
           }
           

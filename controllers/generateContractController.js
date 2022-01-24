@@ -71,7 +71,7 @@ exports.generateContract = async(req,res,next) => {
       }
 
       const [clients_change] = await conn.execute(
-        "INSERT INTO `contracts` (`transporter`, `client`, `dep_place`, `int_place`, `arival_place`, `price`, `pay_deadline`, `dep_date`, `arival_date`, `finished`) VALUES(?,?,?,?,?,?,?,?,?,?)",[
+        "INSERT INTO `contracts` (`transporter`, `client`, `dep_place`, `int_place`, `arival_place`, `price`, `pay_deadline`, `dep_date`, `arival_date`, `finished`, `obs`) VALUES(?,?,?,?,?,?,?,?,?,?,?)",[
           row_trucks[0].id,
           row_clients[0].id,
           req.body.dep_place,
@@ -81,7 +81,8 @@ exports.generateContract = async(req,res,next) => {
           req.body.pay_deadline,
           req.body.dep_date,
           req.body.arival_date,
-          0
+          0,
+          req.body.obs
         ]);
 
         if (clients_change.affectedRows == 0) {
